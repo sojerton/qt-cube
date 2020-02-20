@@ -1,2 +1,2 @@
 # qt-cube
-! [] (demo.gif)
+! [] (https://github.com/sojerton/qt-cube/edit/master/demo.gif)
