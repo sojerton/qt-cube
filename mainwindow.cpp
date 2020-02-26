@@ -126,6 +126,7 @@ void MainWindow::paintGL()
     m_object.bind();
     m_program->setUniformValue(u_modelToWorld, m_transform.toMatrix());
     glDrawArrays(GL_TRIANGLES, 0, sizeof(sg_vertexes) / sizeof(sg_vertexes[0]));
+    glDrawArrays(GL_LINE_LOOP, 0, sizeof(sg_vertexes) / sizeof(sg_vertexes[0]));
     m_object.release();
   }
   m_program->release();
