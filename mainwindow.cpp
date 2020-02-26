@@ -7,16 +7,16 @@
 #include "vertex.h"
 
 // Front Verticies
-#define VERTEX_FTR Vertex( QVector3D( 0.5f,  0.5f,  0.5f), QVector3D( 1.0f, 0.0f, 0.0f ) )
-#define VERTEX_FTL Vertex( QVector3D(-0.5f,  0.5f,  0.5f), QVector3D( 0.0f, 1.0f, 0.0f ) )
-#define VERTEX_FBL Vertex( QVector3D(-0.5f, -0.5f,  0.5f), QVector3D( 0.0f, 0.0f, 1.0f ) )
-#define VERTEX_FBR Vertex( QVector3D( 0.5f, -0.5f,  0.5f), QVector3D( 0.0f, 0.0f, 0.0f ) )
+#define VERTEX_FTR Vertex( QVector3D( 0.5f,  0.5f,  0.5f), QVector3D( 0.3f, 0.3f, 0.3f ) )
+#define VERTEX_FTL Vertex( QVector3D(-0.5f,  0.5f,  0.5f), QVector3D( 0.3f, 0.3f, 0.3f ) )
+#define VERTEX_FBL Vertex( QVector3D(-0.5f, -0.5f,  0.5f), QVector3D( 0.3f, 0.3f, 0.3f ) )
+#define VERTEX_FBR Vertex( QVector3D( 0.5f, -0.5f,  0.5f), QVector3D( 0.3f, 0.3f, 0.3f ) )
 
 // Back Verticies
-#define VERTEX_BTR Vertex( QVector3D( 0.5f,  0.5f, -0.5f), QVector3D( 1.0f, 1.0f, 0.0f ) )
-#define VERTEX_BTL Vertex( QVector3D(-0.5f,  0.5f, -0.5f), QVector3D( 0.0f, 1.0f, 1.0f ) )
-#define VERTEX_BBL Vertex( QVector3D(-0.5f, -0.5f, -0.5f), QVector3D( 1.0f, 0.0f, 1.0f ) )
-#define VERTEX_BBR Vertex( QVector3D( 0.5f, -0.5f, -0.5f), QVector3D( 1.0f, 1.0f, 1.0f ) )
+#define VERTEX_BTR Vertex( QVector3D( 0.5f,  0.5f, -1.5f), QVector3D( 0.3f, 0.3f, 0.3f ) )
+#define VERTEX_BTL Vertex( QVector3D(-0.5f,  0.5f, -1.5f), QVector3D( 0.3f, 0.3f, 0.3f ) )
+#define VERTEX_BBL Vertex( QVector3D(-0.5f, -0.5f, -1.5f), QVector3D( 0.3f, 0.3f, 0.3f ) )
+#define VERTEX_BBR Vertex( QVector3D( 0.5f, -0.5f, -1.5f), QVector3D( 0.3f, 0.3f, 0.3f ) )
 
 // Create a colored cube
 static const Vertex sg_vertexes[] = {
@@ -98,7 +98,7 @@ void MainWindow::initializeGL()
     m_program->enableAttributeArray(0);
     m_program->enableAttributeArray(1);
     m_program->setAttributeBuffer(0, GL_FLOAT, Vertex::positionOffset(), Vertex::PositionTupleSize, Vertex::stride());
-    m_program->setAttributeBuffer(1, GL_FLOAT, Vertex::colorOffset(), Vertex::ColorTupleSize, Vertex::stride());
+    m_program->setAttributeBuffer(1, GL_FLOAT,  Vertex::colorOffset(), Vertex::ColorTupleSize, Vertex::stride());
 
     // Release
     m_object.release();

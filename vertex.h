@@ -1,7 +1,9 @@
 #ifndef VERTEX_H
 #define VERTEX_H
 
+#include <QColor>
 #include <QVector3D>
+#include <QColorDialog>
 
 class Vertex
 {
