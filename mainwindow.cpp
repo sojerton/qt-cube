@@ -31,7 +31,15 @@
 #define PRIM_BBL Vertex( QVector3D(-0.5f, -0.5f, -1.5f), QVector3D( 1.3f, 0.3f, 0.3f ) )
 #define PRIM_BBR Vertex( QVector3D( 0.5f, -0.5f, -1.5f), QVector3D( 1.3f, 0.3f, 0.3f ) )
 
+// Serifs
+#define FIRST Vertex( QVector3D(0.5f,  0.5f,  0.5f), QVector3D( 0.0f, 1.0f, 0.0f ) )
+#define TWO Vertex( QVector3D(-0.4f,  0.4f,  0.4f), QVector3D( 0.0f, 1.0f, 0.0f )  )
 
+
+// Create serifs
+static const Vertex sg_vertexes_serif[] = {
+    FIRST, TWO
+};
 
 // Create figure
 static const Vertex sg_vertexes[] = {
@@ -63,6 +71,10 @@ static const Vertex sg_vertexes_prim[] = {
     PRIM_BBR, PRIM_FBR, PRIM_BBR,
     PRIM_BTR
 };
+
+#undef FIRST
+#undef TWO
+
 #undef PRIM_BBR
 #undef PRIM_BBL
 #undef PRIM_BTL
@@ -136,7 +148,7 @@ void MainWindow::initializeGL()
     m_vertex.release();
     m_program->release();
 
-    // Create Shader
+    // Create Shader for primitive
     p_program = new QOpenGLShaderProgram();
     p_program->addShaderFromSourceFile(QOpenGLShader::Vertex, ":/shader.vert");
     p_program->addShaderFromSourceFile(QOpenGLShader::Fragment, ":/shader.frag");
@@ -160,11 +172,37 @@ void MainWindow::initializeGL()
     p_program->enableAttributeArray(1);
     p_program->setAttributeBuffer(0, GL_FLOAT, Vertex::positionOffset(), Vertex::PositionTupleSize, Vertex::stride());
     p_program->setAttributeBuffer(1, GL_FLOAT,  Vertex::colorOffset(), Vertex::ColorTupleSize, Vertex::stride());
-
     // Release
     p_object.release();
     p_vertex.release();
     p_program->release();
+    // Create Shader for serif
+    s_program = new QOpenGLShaderProgram();
+    s_program->addShaderFromSourceFile(QOpenGLShader::Vertex, ":/shader.vert");
+    s_program->addShaderFromSourceFile(QOpenGLShader::Fragment, ":/shader.frag");
+    s_program->link();
+    s_program->bind();
+    // Cache Uniform Locations
+    u_modelToWorld = m_program->uniformLocation("modelToWorld");
+    u_worldToView = m_program->uniformLocation("worldToView");
+    // Create Buffer
+    s_vertex.create();
+    s_vertex.bind();
+    s_vertex.setUsagePattern(QOpenGLBuffer::StaticDraw);
+    s_vertex.allocate(sg_vertexes_serif, sizeof (sg_vertexes_serif));
+
+    // Create Vertex Array Object
+    s_object.create();
+    s_object.bind();
+    s_program->enableAttributeArray(0);
+    s_program->enableAttributeArray(1);
+    s_program->setAttributeBuffer(0, GL_FLOAT, Vertex::positionOffset(), Vertex::PositionTupleSize, Vertex::stride());
+    s_program->setAttributeBuffer(1, GL_FLOAT,  Vertex::colorOffset(), Vertex::ColorTupleSize, Vertex::stride());
+
+    // Release
+    s_object.release();
+    s_vertex.release();
+    s_program->release();
   }
 }
 
@@ -197,22 +235,33 @@ void MainWindow::paintGL()
     p_object.bind();
     p_program->setUniformValue(u_modelToWorld, m_transform.toMatrix());
     glDrawArrays(GL_LINE_LOOP, 0, sizeof(sg_vertexes_prim) / sizeof(sg_vertexes_prim[0]));
-    glDrawArrays(GL_LINES, 0, sizeof(sg_vertexes_prim) / sizeof(sg_vertexes_prim[0]));
     p_object.release();
   }
   p_program->release();
+  // Render serif using shader
+  s_program->bind();
+  s_program->setUniformValue(u_worldToView, m_projection);
+  {
+    s_object.bind();
+    s_program->setUniformValue(u_modelToWorld, m_transform.toMatrix());
+    glDrawArrays(GL_LINES, 0, sizeof(sg_vertexes_serif) / sizeof(sg_vertexes_serif[0]));
+    s_object.release();
+  }
+  s_program->release();
 
   paintSerif();
 
 }
-
+    // Painting serif
 void MainWindow::paintSerif(){
     QPainter painter(this);
     painter.beginNativePainting();
 
     glDisable(GL_CULL_FACE);
     painter.setPen(Qt::green);
-    painter.drawLine(0, 0, 50, 50);
+    painter.drawLine(QPointF(Vertex::positionOffset(), Vertex::positionOffset()),
+                     QPointF(Vertex::positionOffset()+50, Vertex::positionOffset()+50));
+
     glEnable(GL_CULL_FACE);
 
     painter.endNativePainting();
@@ -227,6 +276,9 @@ void MainWindow::teardownGL()
   p_object.destroy();
   p_vertex.destroy();
   delete p_program;
+  s_object.destroy();
+  s_vertex.destroy();
+  delete s_program;
 }
 
 void MainWindow::update()

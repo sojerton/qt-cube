@@ -33,9 +33,9 @@ protected:
 private:
   QPoint lastPos;
   // OpenGL State Information
-  QOpenGLBuffer m_vertex, p_vertex;
-  QOpenGLVertexArrayObject m_object, p_object;
-  QOpenGLShaderProgram *m_program, *p_program;
+  QOpenGLBuffer m_vertex, p_vertex, s_vertex;
+  QOpenGLVertexArrayObject m_object, p_object, s_object;
+  QOpenGLShaderProgram *m_program, *p_program, *s_program;
 
   // Shader Information
   int u_modelToWorld;
