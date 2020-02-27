@@ -41,7 +41,7 @@ private:
   int u_modelToWorld;
   int u_worldToView;
   QMatrix4x4 m_projection;
-  Transform3D m_transform;
+  Transform3D m_transform, s_transform;
 };
 
 

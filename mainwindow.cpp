@@ -4,6 +4,7 @@
 #include <QOpenGLShaderProgram>
 #include <QExposeEvent>
 #include <QPainter>
+#include <QPair>
 #include "vectors.h"
 
 /*******************************************************************************
@@ -13,6 +14,7 @@
 MainWindow::MainWindow()
 {
   m_transform.translate(0.0f, 0.0f, -5.0f);
+  s_transform.translate(0.0f, 0.0f, -5.0f);
 }
 
 void MainWindow::initializeGL()
@@ -152,14 +154,13 @@ void MainWindow::paintGL()
   s_program->setUniformValue(u_worldToView, m_projection);
   {
     s_object.bind();
-    s_program->setUniformValue(u_modelToWorld, m_transform.toMatrix());
-
-    glDrawArrays(GL_LINES, 0, sizeof(sg_vertexes_serif) / sizeof(sg_vertexes_serif[0]));
+    s_program->setUniformValue(u_modelToWorld, s_transform.toMatrix());
+    glDrawArrays(GL_LINES, 0, sizeof(sg_vertexes_serif) / sizeof(sg_vertexes_prim[0]));
     s_object.release();
   }
   s_program->release();
+  s_transform.setRotation(5.0f, QVector3D(1.1f, 1.1f, 0.0f));
 
-  //paintSerif();
 }
 /*TODO text painting/////////////////////
 
@@ -171,7 +172,6 @@ void MainWindow::paintSerif(){
     painter.setPen(Qt::green);
     painter.drawLine(QPointF(Vertex::positionOffset(), Vertex::positionOffset()),
                      QPointF(Vertex::positionOffset()+50, Vertex::positionOffset()+50));
-
     glEnable(GL_CULL_FACE);
 
     painter.endNativePainting();
@@ -210,13 +210,17 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
     // Rotate by mouse move
     if (event->buttons() & Qt::LeftButton && (dx > 0)) {
         m_transform.rotate(2.0f, QVector3D(0.0f, 0.4f, 0.0f));
+        s_transform.rotate(2.0f, QVector3D(0.0f, 0.4f, 0.0f));
     } else if (event->buttons() & Qt::LeftButton && (dx < 0)) {
         m_transform.rotate(-2.0f, QVector3D(0.0f, 0.4f, 0.0f));
+        s_transform.rotate(-2.0f, QVector3D(0.0f, 0.4f, 0.0f));
     }
     if (event->buttons() & Qt::LeftButton && (dy > 0)) {
         m_transform.rotate(2.0f, QVector3D(0.4f, 0.0f, 0.0f));
+        s_transform.rotate(2.0f, QVector3D(0.4f, 0.0f, 0.0f));
     } else if (event->buttons() & Qt::LeftButton && (dy < 0)) {
         m_transform.rotate(-2.0f, QVector3D(0.4f, 0.0f, 0.0f));
+        s_transform.rotate(-2.0f, QVector3D(0.4f, 0.0f, 0.0f));
     }
     lastPos = event->pos();
 }
@@ -228,6 +232,7 @@ void MainWindow::wheelEvent(QWheelEvent *event){
 
     if (event->orientation() == Qt::Vertical) {
         m_transform.grow(numSteps);
+        s_transform.grow(numSteps);
     }
     event->accept();
 }
