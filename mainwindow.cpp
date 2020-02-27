@@ -4,6 +4,7 @@
 #include <QString>
 #include <QOpenGLShaderProgram>
 #include <QExposeEvent>
+#include <QPainter>
 #include "vertex.h"
 
 // Front Verticies
@@ -30,7 +31,9 @@
 #define PRIM_BBL Vertex( QVector3D(-0.5f, -0.5f, -1.5f), QVector3D( 1.3f, 0.3f, 0.3f ) )
 #define PRIM_BBR Vertex( QVector3D( 0.5f, -0.5f, -1.5f), QVector3D( 1.3f, 0.3f, 0.3f ) )
 
-// Create a colored cube
+
+
+// Create figure
 static const Vertex sg_vertexes[] = {
   // Face 1 (Front)
     VERTEX_FTR, VERTEX_FTL, VERTEX_FBL,
@@ -51,9 +54,8 @@ static const Vertex sg_vertexes[] = {
     VERTEX_FTR, VERTEX_FBR, VERTEX_BBR,
     VERTEX_BBR, VERTEX_BTR, VERTEX_FTR
 };
-// Create a colored cube
+// Create primitive
 static const Vertex sg_vertexes_prim[] = {
-  // Face 1 (Front)
     PRIM_FTR, PRIM_FTL, PRIM_FBL,
     PRIM_FBR, PRIM_FTR, PRIM_BTR,
     PRIM_BTL, PRIM_FTL, PRIM_BTL,
@@ -188,16 +190,32 @@ void MainWindow::paintGL()
     m_object.release();
   }
   m_program->release();
-  // Render 2 using shader
+  // Render primitive using shader
   p_program->bind();
   p_program->setUniformValue(u_worldToView, m_projection);
   {
     p_object.bind();
     p_program->setUniformValue(u_modelToWorld, m_transform.toMatrix());
     glDrawArrays(GL_LINE_LOOP, 0, sizeof(sg_vertexes_prim) / sizeof(sg_vertexes_prim[0]));
+    glDrawArrays(GL_LINES, 0, sizeof(sg_vertexes_prim) / sizeof(sg_vertexes_prim[0]));
     p_object.release();
   }
   p_program->release();
+
+  paintSerif();
+
+}
+
+void MainWindow::paintSerif(){
+    QPainter painter(this);
+    painter.beginNativePainting();
+
+    glDisable(GL_CULL_FACE);
+    painter.setPen(Qt::green);
+    painter.drawLine(0, 0, 50, 50);
+    glEnable(GL_CULL_FACE);
+
+    painter.endNativePainting();
 }
 
 void MainWindow::teardownGL()
@@ -228,13 +246,13 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
     int dx = event->x() - lastPos.x();
     int dy = event->y() - lastPos.y();
     // Rotate cube by mouse move
-    if (event->buttons() & Qt::LeftButton & (dx > 0)) {
+    if (event->buttons() & Qt::LeftButton && (dx > 0)) {
         m_transform.rotate(2.0f, QVector3D(0.0f, 0.4f, 0.0f));
-    } else if (event->buttons() & Qt::LeftButton & (dx < 0)) {
+    } else if (event->buttons() & Qt::LeftButton && (dx < 0)) {
         m_transform.rotate(-2.0f, QVector3D(0.0f, 0.4f, 0.0f));
-    } else if (event->buttons() & Qt::LeftButton & (dy > 0)) {
+    } else if (event->buttons() & Qt::LeftButton && (dy > 0)) {
         m_transform.rotate(2.0f, QVector3D(0.4f, 0.0f, 0.0f));
-    } else if (event->buttons() & Qt::LeftButton & (dy < 0)) {
+    } else if (event->buttons() & Qt::LeftButton && (dy < 0)) {
         m_transform.rotate(-2.0f, QVector3D(0.4f, 0.0f, 0.0f));
     }
     lastPos = event->pos();
