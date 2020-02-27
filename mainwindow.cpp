@@ -18,32 +18,47 @@
 #define VERTEX_BBL Vertex( QVector3D(-0.5f, -0.5f, -1.5f), QVector3D( 0.3f, 0.3f, 0.3f ) )
 #define VERTEX_BBR Vertex( QVector3D( 0.5f, -0.5f, -1.5f), QVector3D( 0.3f, 0.3f, 0.3f ) )
 
-// Front Verticies
+// Front Primitive
 #define PRIM_FTR Vertex( QVector3D( 0.5f,  0.5f,  0.5f), QVector3D( 1.3f, 0.3f, 0.3f ) )
 #define PRIM_FTL Vertex( QVector3D(-0.5f,  0.5f,  0.5f), QVector3D( 1.3f, 0.3f, 0.3f ) )
 #define PRIM_FBL Vertex( QVector3D(-0.5f, -0.5f,  0.5f), QVector3D( 1.3f, 0.3f, 0.3f ) )
 #define PRIM_FBR Vertex( QVector3D( 0.5f, -0.5f,  0.5f), QVector3D( 1.3f, 0.3f, 0.3f ) )
-// Back Verticies
+// Back Primitive
 #define PRIM_BTR Vertex( QVector3D( 0.5f,  0.5f, -1.5f), QVector3D( 1.3f, 0.3f, 0.3f ) )
 #define PRIM_BTL Vertex( QVector3D(-0.5f,  0.5f, -1.5f), QVector3D( 1.3f, 0.3f, 0.3f ) )
 #define PRIM_BBL Vertex( QVector3D(-0.5f, -0.5f, -1.5f), QVector3D( 1.3f, 0.3f, 0.3f ) )
 #define PRIM_BBR Vertex( QVector3D( 0.5f, -0.5f, -1.5f), QVector3D( 1.3f, 0.3f, 0.3f ) )
 
-// Serifs
+// Serifs long
 #define ONE Vertex( QVector3D(0.5f,  0.5f,  0.5f), QVector3D( 0.0f, 1.0f, 0.0f ) )
-#define TWO Vertex( QVector3D(-0.4f,  0.4f,  0.4f), QVector3D( 0.0f, 1.0f, 0.0f ) )
-#define THREE Vertex( QVector3D(-0.4f,  0.4f,  0.4f), QVector3D( 0.0f, 1.0f, 0.0f )  )
-#define FOUR Vertex( QVector3D(-0.4f,  0.4f,  0.4f), QVector3D( 0.0f, 1.0f, 0.0f )  )
-#define FIVE Vertex( QVector3D(-0.4f,  0.4f,  0.4f), QVector3D( 0.0f, 1.0f, 0.0f )  )
-#define SIX Vertex( QVector3D(-0.4f,  0.4f,  0.4f), QVector3D( 0.0f, 1.0f, 0.0f )  )
-#define SEVEN Vertex( QVector3D(-0.4f,  0.4f,  0.4f), QVector3D( 0.0f, 1.0f, 0.0f )  )
-#define EIGHN Vertex( QVector3D(-0.4f,  0.4f,  0.4f), QVector3D( 0.0f, 1.0f, 0.0f )  )
-#define NINE Vertex( QVector3D(-0.4f,  0.4f,  0.4f), QVector3D( 0.0f, 1.0f, 0.0f )  )
-#define TEN Vertex( QVector3D(-0.4f,  0.4f,  0.4f), QVector3D( 0.0f, 1.0f, 0.0f )  )
+#define N_ONE Vertex( QVector3D(0.5f,  0.5f,  0.45f), QVector3D( 0.0f, 1.0f, 0.0f ) )
+#define TWO Vertex( QVector3D(0.5f,  0.5f,  0.3f), QVector3D( 0.0f, 1.0f, 0.0f ) )
+#define N_TWO Vertex( QVector3D(0.5f,  0.5f,  0.25f), QVector3D( 0.0f, 1.0f, 0.0f ) )
+#define THREE Vertex( QVector3D(0.5f,  0.5f,  0.1f), QVector3D( 0.0f, 1.0f, 0.0f )  )
+#define N_THREE Vertex( QVector3D(0.5f,  0.5f,  0.05f), QVector3D( 0.0f, 1.0f, 0.0f )  )
+#define FOUR Vertex( QVector3D(0.5f,  0.5f,  -0.1f), QVector3D( 0.0f, 1.0f, 0.0f )  )
+#define N_FOUR Vertex( QVector3D(0.5f,  0.5f,  -0.15f), QVector3D( 0.0f, 1.0f, 0.0f )  )
+#define FIVE Vertex( QVector3D(0.5f,  0.5f,  -0.3f), QVector3D( 0.0f, 1.0f, 0.0f )  )
+#define N_FIVE Vertex( QVector3D(0.5f,  0.5f,  -0.35f), QVector3D( 0.0f, 1.0f, 0.0f )  )
+#define SIX Vertex( QVector3D(0.5f,  0.5f,  -0.5f), QVector3D( 0.0f, 1.0f, 0.0f )  )
+#define N_SIX Vertex( QVector3D(0.5f,  0.5f,  -0.55f), QVector3D( 0.0f, 1.0f, 0.0f )  )
+#define SEVEN Vertex( QVector3D(0.5f,  0.5f,  -0.7f), QVector3D( 0.0f, 1.0f, 0.0f )  )
+#define N_SEVEN Vertex( QVector3D(0.5f,  0.5f,  -0.75f), QVector3D( 0.0f, 1.0f, 0.0f )  )
+#define EIGHN Vertex( QVector3D(0.5f,  0.5f,  -0.9f), QVector3D( 0.0f, 1.0f, 0.0f )  )
+#define N_EIGHN Vertex( QVector3D(0.5f,  0.5f,  -0.95f), QVector3D( 0.0f, 1.0f, 0.0f )  )
+#define NINE Vertex( QVector3D(0.5f,  0.5f,  -1.1f), QVector3D( 0.0f, 1.0f, 0.0f )  )
+#define N_NINE Vertex( QVector3D(0.5f,  0.5f,  -1.15f), QVector3D( 0.0f, 1.0f, 0.0f )  )
+#define TEN Vertex( QVector3D(0.5f,  0.5f,  -1.3f), QVector3D( 0.0f, 1.0f, 0.0f )  )
+#define N_TEN Vertex( QVector3D(0.5f,  0.5f,  -1.35f), QVector3D( 0.0f, 1.0f, 0.0f )  )
+#define LOOP Vertex( QVector3D(0.5f,  0.5f,  -1.5f), QVector3D( 0.0f, 1.0f, 0.0f )  )
+#define N_LOOP Vertex( QVector3D(0.5f,  0.5f,  -1.55f), QVector3D( 0.0f, 1.0f, 0.0f )  )
 
 // Create serifs
 static const Vertex sg_vertexes_serif[] = {
-    ONE, TWO
+    ONE, N_ONE, TWO, N_TWO, THREE, N_THREE,
+    FOUR, N_FOUR, FIVE, N_FIVE, SIX, N_SIX,
+    SEVEN, N_SEVEN, EIGHN, N_EIGHN, NINE, N_NINE,
+    TEN, N_TEN, LOOP, N_LOOP
 };
 
 // Create figure
@@ -78,15 +93,27 @@ static const Vertex sg_vertexes_prim[] = {
 };
 
 #undef ONE
+#undef N_ONE
 #undef TWO
+#undef N_TWO
 #undef THREE
+#undef N_THREE
 #undef FOUR
+#undef N_FOUR
 #undef FIVE
+#undef N_FIVE
 #undef SIX
+#undef N_SIX
 #undef SEVEN
+#undef N_SEVEN
 #undef EIGHN
+#undef N_EIGHN
 #undef NINE
+#undef N_NINE
 #undef TEN
+#undef N_TEN
+#undef LOOP
+#undef N_LOOP
 
 #undef PRIM_BBR
 #undef PRIM_BBL
@@ -131,7 +158,6 @@ void MainWindow::initializeGL()
   // Application-specific initialization
   {
     // Create Shader
-
     m_program = new QOpenGLShaderProgram();
     m_program->addShaderFromSourceFile(QOpenGLShader::Vertex, ":/shader.vert");
     m_program->addShaderFromSourceFile(QOpenGLShader::Fragment, ":/shader.frag");
@@ -311,7 +337,6 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
     // Mouse move axis
     int dx = event->x() - lastPos.x();
     int dy = event->y() - lastPos.y();
-    bool line = true;
     // Rotate by mouse move
     if (event->buttons() & Qt::LeftButton && (dx > 0)) {
         m_transform.rotate(2.0f, QVector3D(0.0f, 0.4f, 0.0f));
@@ -320,10 +345,8 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
     }
     if (event->buttons() & Qt::LeftButton && (dy > 0)) {
         m_transform.rotate(2.0f, QVector3D(0.4f, 0.0f, 0.0f));
-        line = false;
     } else if (event->buttons() & Qt::LeftButton && (dy < 0)) {
         m_transform.rotate(-2.0f, QVector3D(0.4f, 0.0f, 0.0f));
-        line = false;
     }
     lastPos = event->pos();
 }
