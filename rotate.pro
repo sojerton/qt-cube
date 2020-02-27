@@ -33,6 +33,7 @@ SOURCES += \
 HEADERS += \
         change.h \
         mainwindow.h \
+        vectors.h \
         vertex.h
 
 FORMS += \
