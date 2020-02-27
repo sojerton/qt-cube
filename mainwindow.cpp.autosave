@@ -311,7 +311,6 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
     // Mouse move axis
     int dx = event->x() - lastPos.x();
     int dy = event->y() - lastPos.y();
-    bool line = true;
     // Rotate by mouse move
     if (event->buttons() & Qt::LeftButton && (dx > 0)) {
         m_transform.rotate(2.0f, QVector3D(0.0f, 0.4f, 0.0f));
@@ -320,10 +319,8 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
     }
     if (event->buttons() & Qt::LeftButton && (dy > 0)) {
         m_transform.rotate(2.0f, QVector3D(0.4f, 0.0f, 0.0f));
-        line = false;
     } else if (event->buttons() & Qt::LeftButton && (dy < 0)) {
         m_transform.rotate(-2.0f, QVector3D(0.4f, 0.0f, 0.0f));
-        line = false;
     }
     lastPos = event->pos();
 }
