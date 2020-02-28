@@ -111,6 +111,11 @@ void MainWindow::initializeGL()
     s_program->setAttributeBuffer(0, GL_FLOAT, Vertex::positionOffset(), Vertex::PositionTupleSize, Vertex::stride());
     s_program->setAttributeBuffer(1, GL_FLOAT,  Vertex::colorOffset(), Vertex::ColorTupleSize, Vertex::stride());
 
+//    s_program->disableAttributeArray(0);
+//    s_vertex.allocate(sg_vertexes_serif, sizeof (sg_vertexes_serif));
+//    s_program->enableAttributeArray(0);
+//    s_program->setAttributeBuffer(0, GL_FLOAT, Vertex::positionOffset(), Vertex::PositionTupleSize, Vertex::stride());
+
     // Release
     s_object.release();
     s_vertex.release();
@@ -155,11 +160,29 @@ void MainWindow::paintGL()
   {
     s_object.bind();
     s_program->setUniformValue(u_modelToWorld, s_transform.toMatrix());
-    glDrawArrays(GL_LINES, 0, sizeof(sg_vertexes_serif) / sizeof(sg_vertexes_prim[0]));
+        //glDrawArrays(GL_LINES, 0, sizeof(sg_vertexes_serif));
+
+         s_transform.setTranslation(QVector3D(0.5f, 0.5f, 0.5f));
+         glDrawArrays(GL_LINES, 0, sizeof(sg_vertexes_serif));
+        //s_transform.setTranslation(-0.5f, 0.0f, 0.0f);
+//         glDrawArrays(GL_LINES, 0, sizeof(sg_vertexes_serif));
+//        s_transform.setTranslation(0.0f, 0.5f, 0.0f);
+//         glDrawArrays(GL_LINES, 0, sizeof(sg_vertexes_serif));
+//        s_transform.setTranslation(0.5f, 0.0f, 0.0f);
+        //s_transform.setRotation(2.0f, QVector3D(0.0f, 0.4f, 0.0f));
     s_object.release();
   }
   s_program->release();
-  s_transform.setRotation(5.0f, QVector3D(1.1f, 1.1f, 0.0f));
+
+  s_program->bind();
+  s_program->setUniformValue(u_worldToView, m_projection);
+  {
+    s_object.bind();
+    s_program->setUniformValue(u_modelToWorld, s_transform.toMatrix());
+        glDrawArrays(GL_LINES, 0, sizeof(sg_vertexes_serif));
+    s_object.release();
+  }
+  s_program->release();
 
 }
 /*TODO text painting/////////////////////

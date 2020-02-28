@@ -26,35 +26,36 @@
 
 // Serifs long
 #define ONE Vertex( QVector3D(0.5f,  0.5f,  0.5f), QVector3D( 0.0f, 1.0f, 0.0f ) )
-#define N_ONE Vertex( QVector3D(0.5f,  0.5f,  0.45f), QVector3D( 0.0f, 1.0f, 0.0f ) )
+#define N_ONE Vertex( QVector3D(0.55f,  0.5f,  0.5f), QVector3D( 0.0f, 1.0f, 0.0f ) )
 #define TWO Vertex( QVector3D(0.5f,  0.5f,  0.3f), QVector3D( 0.0f, 1.0f, 0.0f ) )
-#define N_TWO Vertex( QVector3D(0.5f,  0.5f,  0.25f), QVector3D( 0.0f, 1.0f, 0.0f ) )
+#define N_TWO Vertex( QVector3D(0.55f,  0.5f,  0.3f), QVector3D( 0.0f, 1.0f, 0.0f ) )
 #define THREE Vertex( QVector3D(0.5f,  0.5f,  0.1f), QVector3D( 0.0f, 1.0f, 0.0f )  )
-#define N_THREE Vertex( QVector3D(0.5f,  0.5f,  0.05f), QVector3D( 0.0f, 1.0f, 0.0f )  )
+#define N_THREE Vertex( QVector3D(0.55f,  0.5f,  0.1f), QVector3D( 0.0f, 1.0f, 0.0f )  )
 #define FOUR Vertex( QVector3D(0.5f,  0.5f,  -0.1f), QVector3D( 0.0f, 1.0f, 0.0f )  )
-#define N_FOUR Vertex( QVector3D(0.5f,  0.5f,  -0.15f), QVector3D( 0.0f, 1.0f, 0.0f )  )
+#define N_FOUR Vertex( QVector3D(0.55f,  0.5f,  -0.1f), QVector3D( 0.0f, 1.0f, 0.0f )  )
 #define FIVE Vertex( QVector3D(0.5f,  0.5f,  -0.3f), QVector3D( 0.0f, 1.0f, 0.0f )  )
-#define N_FIVE Vertex( QVector3D(0.5f,  0.5f,  -0.35f), QVector3D( 0.0f, 1.0f, 0.0f )  )
+#define N_FIVE Vertex( QVector3D(0.55f,  0.5f,  -0.3f), QVector3D( 0.0f, 1.0f, 0.0f )  )
 #define SIX Vertex( QVector3D(0.5f,  0.5f,  -0.5f), QVector3D( 0.0f, 1.0f, 0.0f )  )
-#define N_SIX Vertex( QVector3D(0.5f,  0.5f,  -0.55f), QVector3D( 0.0f, 1.0f, 0.0f )  )
+#define N_SIX Vertex( QVector3D(0.55f,  0.5f,  -0.5f), QVector3D( 0.0f, 1.0f, 0.0f )  )
 #define SEVEN Vertex( QVector3D(0.5f,  0.5f,  -0.7f), QVector3D( 0.0f, 1.0f, 0.0f )  )
-#define N_SEVEN Vertex( QVector3D(0.5f,  0.5f,  -0.75f), QVector3D( 0.0f, 1.0f, 0.0f )  )
+#define N_SEVEN Vertex( QVector3D(0.55f,  0.5f,  -0.7f), QVector3D( 0.0f, 1.0f, 0.0f )  )
 #define EIGHN Vertex( QVector3D(0.5f,  0.5f,  -0.9f), QVector3D( 0.0f, 1.0f, 0.0f )  )
-#define N_EIGHN Vertex( QVector3D(0.5f,  0.5f,  -0.95f), QVector3D( 0.0f, 1.0f, 0.0f )  )
+#define N_EIGHN Vertex( QVector3D(0.55f,  0.5f,  -0.9f), QVector3D( 0.0f, 1.0f, 0.0f )  )
 #define NINE Vertex( QVector3D(0.5f,  0.5f,  -1.1f), QVector3D( 0.0f, 1.0f, 0.0f )  )
-#define N_NINE Vertex( QVector3D(0.5f,  0.5f,  -1.15f), QVector3D( 0.0f, 1.0f, 0.0f )  )
+#define N_NINE Vertex( QVector3D(0.55f,  0.5f,  -1.1f), QVector3D( 0.0f, 1.0f, 0.0f )  )
 #define TEN Vertex( QVector3D(0.5f,  0.5f,  -1.3f), QVector3D( 0.0f, 1.0f, 0.0f )  )
-#define N_TEN Vertex( QVector3D(0.5f,  0.5f,  -1.35f), QVector3D( 0.0f, 1.0f, 0.0f )  )
+#define N_TEN Vertex( QVector3D(0.55f,  0.5f,  -1.3f), QVector3D( 0.0f, 1.0f, 0.0f )  )
 #define LOOP Vertex( QVector3D(0.5f,  0.5f,  -1.5f), QVector3D( 0.0f, 1.0f, 0.0f )  )
-#define N_LOOP Vertex( QVector3D(0.5f,  0.5f,  -1.55f), QVector3D( 0.0f, 1.0f, 0.0f )  )
+#define N_LOOP Vertex( QVector3D(0.55f,  0.5f,  -1.5f), QVector3D( 0.0f, 1.0f, 0.0f )  )
 
 // Create serifs
-static const Vertex sg_vertexes_serif[] = {
+Vertex sg_vertexes_serif[] = {
     ONE, N_ONE, TWO, N_TWO, THREE, N_THREE,
     FOUR, N_FOUR, FIVE, N_FIVE, SIX, N_SIX,
     SEVEN, N_SEVEN, EIGHN, N_EIGHN, NINE, N_NINE,
     TEN, N_TEN, LOOP, N_LOOP
 };
+
 
 // Create figure
 static const Vertex sg_vertexes[] = {
