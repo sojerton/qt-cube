@@ -56,6 +56,18 @@ Vertex sg_vertexes_serif[] = {
     TEN, N_TEN, LOOP, N_LOOP
 };
 
+Vertex* initSerif(){
+    Vertex* longserif = new Vertex[22*8];
+    for(unsigned int i=0; i<10; i++){
+        float x_count, z_count = 0.5f;
+        if(i%2==0) x_count = 0.5f;
+        else x_count = 0.55f;
+        longserif[i].setPosition(QVector3D(x_count,  0.5f,  z_count));
+        longserif[i].setColor(QVector3D(0.0f, 1.0f, 0.0f));
+        if(i%2!=0) z_count -= 0.2f;
+    }
+    return longserif;
+}
 
 // Create figure
 static const Vertex sg_vertexes[] = {

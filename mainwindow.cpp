@@ -27,7 +27,6 @@ void MainWindow::initializeGL()
   // Set global information
   glEnable(GL_CULL_FACE);
   glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-
   // Application-specific initialization
   {
     // Create Shader
@@ -160,10 +159,10 @@ void MainWindow::paintGL()
   {
     s_object.bind();
     s_program->setUniformValue(u_modelToWorld, s_transform.toMatrix());
-        //glDrawArrays(GL_LINES, 0, sizeof(sg_vertexes_serif));
+         //s_transform.setTranslation(QVector3D(0.5f, 0.5f, 0.5f));
+         glDrawArrays(GL_LINES, 0, 22);
+         //glDrawArrays(GL_LINES, 0, sizeof(sg_vertexes_prim) / sizeof(sg_vertexes_prim[0]));
 
-         s_transform.setTranslation(QVector3D(0.5f, 0.5f, 0.5f));
-         glDrawArrays(GL_LINES, 0, sizeof(sg_vertexes_serif));
         //s_transform.setTranslation(-0.5f, 0.0f, 0.0f);
 //         glDrawArrays(GL_LINES, 0, sizeof(sg_vertexes_serif));
 //        s_transform.setTranslation(0.0f, 0.5f, 0.0f);
@@ -173,7 +172,7 @@ void MainWindow::paintGL()
     s_object.release();
   }
   s_program->release();
-
+/*
   s_program->bind();
   s_program->setUniformValue(u_worldToView, m_projection);
   {
@@ -183,7 +182,7 @@ void MainWindow::paintGL()
     s_object.release();
   }
   s_program->release();
-
+*/
 }
 /*TODO text painting/////////////////////
 
@@ -244,6 +243,21 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
     } else if (event->buttons() & Qt::LeftButton && (dy < 0)) {
         m_transform.rotate(-2.0f, QVector3D(0.4f, 0.0f, 0.0f));
         s_transform.rotate(-2.0f, QVector3D(0.4f, 0.0f, 0.0f));
+    }
+    // Translate by mouse move
+    if (event->buttons() & Qt::RightButton && (dx > 0)) {
+        m_transform.translate(QVector3D(0.1f, 0.0f, 0.0f));
+        s_transform.translate(QVector3D(0.1f, 0.0f, 0.0f));
+    } else if (event->buttons() & Qt::RightButton && (dx < 0)) {
+        m_transform.translate(QVector3D(-0.1f, 0.0f, 0.0f));
+        s_transform.translate(QVector3D(-0.1f, 0.0f, 0.0f));
+    }
+    if (event->buttons() & Qt::RightButton && (dy > 0)) {
+        m_transform.translate(QVector3D(0.0f, -0.1f, 0.0f));
+        s_transform.translate(QVector3D(0.0f, -0.1f, 0.0f));
+    } else if (event->buttons() & Qt::RightButton && (dy < 0)) {
+        m_transform.translate(QVector3D(0.0f, 0.1f, 0.0f));
+        s_transform.translate(QVector3D(0.0f, 0.1f, 0.0f));
     }
     lastPos = event->pos();
 }
