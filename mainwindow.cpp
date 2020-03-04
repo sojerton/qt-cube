@@ -27,6 +27,8 @@ void MainWindow::initializeGL()
   // Set global information
   glEnable(GL_CULL_FACE);
   glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+  Vertex sg_serif[22*8+1];
+  sg_serif[22*8] = initSerif();
   // Application-specific initialization
   {
     // Create Shader
@@ -100,7 +102,7 @@ void MainWindow::initializeGL()
     s_vertex.create();
     s_vertex.bind();
     s_vertex.setUsagePattern(QOpenGLBuffer::StaticDraw);
-    s_vertex.allocate(sg_vertexes_serif, sizeof (sg_vertexes_serif));
+    s_vertex.allocate(sg_serif, sizeof (sg_serif));
 
     // Create Vertex Array Object
     s_object.create();
@@ -132,7 +134,8 @@ void MainWindow::paintGL()
 {
   // Clear
   glClear(GL_COLOR_BUFFER_BIT);
-
+  Vertex sg_serif[22*8+1];
+  sg_serif[22*8] = initSerif();
   // Render using shader
   m_program->bind();
   m_program->setUniformValue(u_worldToView, m_projection);
@@ -159,8 +162,11 @@ void MainWindow::paintGL()
   {
     s_object.bind();
     s_program->setUniformValue(u_modelToWorld, s_transform.toMatrix());
-         //s_transform.setTranslation(QVector3D(0.5f, 0.5f, 0.5f));
-         glDrawArrays(GL_LINES, 0, 22);
+        // s_transform.setTranslation(QVector3D(0.5f, 0.5f, 0.5f));
+         //s_transform.scale(0.5f, 0.5f, 0.5f);
+         glDrawArrays(GL_LINES, 0, sizeof (sg_serif));
+         //s_transform.setRotation(2.0f, QVector3D(0.0f, 0.4f, 0.0f));
+
          //glDrawArrays(GL_LINES, 0, sizeof(sg_vertexes_prim) / sizeof(sg_vertexes_prim[0]));
 
         //s_transform.setTranslation(-0.5f, 0.0f, 0.0f);
@@ -168,10 +174,10 @@ void MainWindow::paintGL()
 //        s_transform.setTranslation(0.0f, 0.5f, 0.0f);
 //         glDrawArrays(GL_LINES, 0, sizeof(sg_vertexes_serif));
 //        s_transform.setTranslation(0.5f, 0.0f, 0.0f);
-        //s_transform.setRotation(2.0f, QVector3D(0.0f, 0.4f, 0.0f));
     s_object.release();
   }
   s_program->release();
+  paintSerif();
 /*
   s_program->bind();
   s_program->setUniformValue(u_worldToView, m_projection);
@@ -184,7 +190,7 @@ void MainWindow::paintGL()
   s_program->release();
 */
 }
-/*TODO text painting/////////////////////
+//TODO text painting/////////////////////
 
 void MainWindow::paintSerif(){
     QPainter painter(this);
@@ -192,13 +198,14 @@ void MainWindow::paintSerif(){
 
     glDisable(GL_CULL_FACE);
     painter.setPen(Qt::green);
-    painter.drawLine(QPointF(Vertex::positionOffset(), Vertex::positionOffset()),
-                     QPointF(Vertex::positionOffset()+50, Vertex::positionOffset()+50));
+    painter.drawText(QRect(100, 200, 400, 200),
+                     Qt::AlignRight | Qt::AlignBottom, "Text");
+//    painter.drawLine(QPointF(Vertex::positionOffset(), Vertex::positionOffset()),
+//                     QPointF(Vertex::positionOffset()+50, Vertex::positionOffset()+50));
     glEnable(GL_CULL_FACE);
-
     painter.endNativePainting();
 }
-*/
+
 void MainWindow::teardownGL()
 {
   // Actually destroy our OpenGL information
@@ -263,7 +270,7 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
 }
 
 void MainWindow::wheelEvent(QWheelEvent *event){
-    // Scaling cube
+    // Scaling figure
     int numDegrees = event->delta() / 8;
     int numSteps = numDegrees / 15;
 

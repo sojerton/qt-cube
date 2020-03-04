@@ -26,7 +26,8 @@ protected slots:
   void teardownGL();
   void update();
 protected:
-  void initSerif();
+  //void initSerif();
+  void paintSerif();
   void mousePressEvent ( QMouseEvent * event );
   void mouseMoveEvent ( QMouseEvent * event );
   void wheelEvent(QWheelEvent *event);
